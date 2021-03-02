@@ -9,9 +9,9 @@ ma = Marshmallow()
 db = SQLAlchemy()
 
 class AudioType(enum.Enum):
-    SONG = "song"
-    PODCAST = "podcast"
-    AUDIOBOOK = "audiobook"
+    song = "song"
+    podcast = "podcast"
+    audiobook = "audiobook"
 
 
 class Audio(db.Model):
@@ -26,7 +26,7 @@ class Audio(db.Model):
     author = db.Column(db.String(255),nullable=True)
     uploaded_time = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     is_deleted = db.Column(db.Boolean, default=False)
-    audio_type = db.Column(db.Enum(AudioType),default=AudioType.SONG,nullable=False)
+    audio_type = db.Column(db.Enum(AudioType),default=AudioType.song,nullable=False)
         
     def __repr__(self):
         return "<Audio '{}'>".format(self.title)
@@ -37,7 +37,7 @@ class Users(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     
     
@@ -63,8 +63,8 @@ class PodcastParticipants(db.Model):
     __tablename__ = "podcast_participants"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    audio_id = db.Column(db.Integer,db.ForeignKey(Audio.__table__.c.id))
-    user_id = db.Column(db.Integer,db.ForeignKey(Users.__table__.c.id))
+    audio_id = db.Column(db.Integer,db.ForeignKey(Audio.__table__.c.id,ondelete='CASCADE'))
+    user_id = db.Column(db.Integer,nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     
     def __repr__(self):

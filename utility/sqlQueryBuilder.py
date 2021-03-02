@@ -1,12 +1,12 @@
 import mysql.connector
 
 class SqlQueryBuilder():
-    conn = mysql.connector.connect(host='127.0.0.1', user='root', passwd='tech@123', database='audiofileserverdb')
+    conn = mysql.connector.connect(host='127.0.0.1', user='root', passwd='*********', database='audiofileserverdb')
     cursor = conn.cursor()
 
     def __init__(self):
         try:
-            self.conn =mysql.connector.connect(host='127.0.0.1', user='root', passwd='tech@123', database='audiofileserverdb')
+            self.conn =mysql.connector.connect(host='127.0.0.1', user='root', passwd='***********', database='audiofileserverdb')
             self.cursor = self.conn.cursor()
         except BaseException as e:
             print(str(e))
