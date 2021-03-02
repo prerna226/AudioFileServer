@@ -4,8 +4,8 @@ from flask import request
 from cerberus import Validator
 from flask_restful import Resource
 from main.models.audio_models import db
-from configConstants.messages import Messages
-from utility.sqlQueryBuilder import SqlQueryBuilder
+from config_constants.messages import Messages
+from utility.sql_query_builder import SqlQueryBuilder
 from main.models.audio_models import Audio,PodcastParticipants,PodcastSeries,Users
 
 class AddAudio(Resource):
